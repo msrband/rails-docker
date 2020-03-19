@@ -24,4 +24,4 @@ ENV RAILS_APP /app
 RUN mkdir -p $RAILS_APP
 #COPY Gemfile Gemfile.lock package.json yarn.lock $RAILS_APP/
 WORKDIR $RAILS_APP
-RUN bundle config set path $BUNDLE_DIR && bundle install --without development test && bundle exec yarn install
+#RUN bundle config set path $BUNDLE_DIR && bundle install --without development test && bundle exec yarn install
