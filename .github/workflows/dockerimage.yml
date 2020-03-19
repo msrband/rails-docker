@@ -13,4 +13,6 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag msrband/rails-test
     - name: Publish the Docker image
-      run: docker push msrband/rails-test
+      env:
+        DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      run: docker login --username msrband --password $DOCKER_HUB_ACCESS_TOKEN && docker push msrband/rails-test
