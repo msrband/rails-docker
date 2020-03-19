@@ -5,14 +5,12 @@ on:
     branches: [ master ]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag msrband/rails-test:$(date +%s)
-    - uses: actions/checkout@v2
+      run: docker build . --file Dockerfile --tag msrband/rails-test
     - name: Publish the Docker image
-      run: docker push msrband/rails-test:$(date +%s)
+      run: docker push msrband/rails-test
