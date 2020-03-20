@@ -22,6 +22,6 @@ RUN gem update bundler
 ENV BUNDLE_DIR /bundle
 ENV RAILS_APP /app
 RUN mkdir -p $RAILS_APP
-#COPY Gemfile Gemfile.lock package.json yarn.lock $RAILS_APP/
+COPY rails-test/Gemfile rails-test/Gemfile.lock rails-test/package.json rails-test/yarn.lock $RAILS_APP/
 WORKDIR $RAILS_APP
-#RUN bundle config set path $BUNDLE_DIR && bundle install --without development test && bundle exec yarn install
+RUN bundle config set path $BUNDLE_DIR && bundle install --without development test && bundle exec yarn install

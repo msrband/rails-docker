@@ -24,5 +24,5 @@ jobs:
         auth_header="$(git config --local --get http.https://github.com/.extraheader)"
         git submodule sync --recursive
         git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
-        # docker build . --file Dockerfile --tag msrband/rails-test
-        # docker login --username msrband --password $DOCKER_HUB_ACCESS_TOKEN && docker push msrband/rails-test
+        docker build . --file Dockerfile --tag msrband/rails-test
+        docker login --username msrband --password $DOCKER_HUB_ACCESS_TOKEN && docker push msrband/rails-test
