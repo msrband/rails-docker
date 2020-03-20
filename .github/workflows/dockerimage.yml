@@ -12,7 +12,6 @@ jobs:
         echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.repository }}'"
 
     - name: Build and publish a docker image 
-      uses: actions/checkout@v2
       if: github.event.action == 'publish_docker'
       shell: bash
       env:
