@@ -11,9 +11,9 @@ jobs:
       run: |
         echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.repository }}'"
 
-    - name : Build and publish a docker image 
+    - name: Build and publish a docker image 
+      uses: actions/checkout@v2
       if: github.event.action == 'publish_docker'
-    - uses: actions/checkout@v2
       shell: bash
       env:
         DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
