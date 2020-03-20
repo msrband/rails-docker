@@ -24,5 +24,9 @@ jobs:
         auth_header="$(git config --local --get http.https://github.com/.extraheader)"
         git submodule sync --recursive
         git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1 --remote --merge
+        git config --global user.email "msrband@gmail.com"
+        git config --global user.name "Github Action Bot"
+        git commit -m 'update submodule' -a
+        git push -u origin master
         # docker build . --file Dockerfile --tag msrband/rails-test
         # docker login --username msrband --password $DOCKER_HUB_ACCESS_TOKEN && docker push msrband/rails-test
