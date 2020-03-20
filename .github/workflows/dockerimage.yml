@@ -7,14 +7,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Event Information
+    - name: Event information
       run: |
         echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.repository }}'"
 
-    # - uses: actions/checkout@v2
-    # - name: Build and Publish a Docker image
-    #   env:
-    #     DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-    #   run: |
-    #     docker build . --file Dockerfile --tag msrband/rails-test
-    #     docker login --username msrband --password $DOCKER_HUB_ACCESS_TOKEN && docker push msrband/rails-test
+    - name : Build and publish a docker image 
+      if: github.event.action == 'publish_docker'
+    - uses: actions/checkout@v2
+      shell: bash
+      env:
+        DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      run: |
+        git config --global url."https://github.com/".insteadOf "git@github.com:"
+        auth_header="$(git config --local --get http.https://github.com/.extraheader)"
+        git submodule sync --recursive
+        git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+
+        # docker build . --file Dockerfile --tag msrband/rails-test
+        # docker login --username msrband --password $DOCKER_HUB_ACCESS_TOKEN && docker push msrband/rails-test

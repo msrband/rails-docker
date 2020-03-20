@@ -1,0 +1,4 @@
+[submodule "rails-test"]
+	path = rails-test
+	url = git@github.com:msrband/rails-test
+	branch = master
