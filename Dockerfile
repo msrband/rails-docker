@@ -1,6 +1,5 @@
 FROM ruby:2.6.5-slim-stretch
 
-COPY sources.list /etc/apt/sources.list
 RUN apt-get update -qq \
 	&& apt-get install -y curl gnupg apt-transport-https
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
