@@ -12,7 +12,7 @@ jobs:
         echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.repository }}'"
 
     - name: Checkout repository
-    - uses: actions/checkout@v2
+      uses: actions/checkout@v2
       if: github.event.action == 'publish_docker'
     - name: Build and publish a docker image 
       if: github.event.action == 'publish_docker'
